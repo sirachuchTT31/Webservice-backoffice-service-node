@@ -2,18 +2,22 @@
   "name": "webservice-auth-service-node",
   "version": "1.0.0",
   "main": "index.js",
+  "prisma": {
+    "schema": "node_modules/database-sdk/prisma/schema.prisma"
+  },
   "scripts": {
     "start": "nodemon index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-common": "npm install  git+https://github.com/sirachuchTT31/Webservice-common-sdk-node.git",
+    "install-database": "npm install git+https://github.com/sirachuchTT31/Webservice-database-sdk-node.git"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/express": "^4.17.21",
+    "database-sdk": "github:sirachuchTT31/Webservice-database-sdk-node",
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "prisma": "^5.18.0"
   }
 }
