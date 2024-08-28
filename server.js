@@ -1,23 +1,19 @@
-const express = require('express')
-const { DatabaseSDK } = require('database-sdk')
-const app = express()
-const Config = {
-    port: 8002
-}
-async function main() {
-    app.listen(Config.port, '127.0.0.1', () => {
-        console.log(`Listening at http://127.0.0.1:${Config.port}`);
-    });
+const express = require("express");
+const cors = require("cors");
+const app = express();
 
-    app.get('/back-office', async (req, res) => {
-        const result = await DatabaseSDK.user.findMany({select : {
-            name : true,
-            id : true
-        }});
+app.use(cors());
 
-        res.json({ statusCode: 200, result: result  , message : 'OK'});
-    });
-}
+app.use(express.json());
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
+app.get("/back-office", (req, res) => {
+    res.json({ message: "Server Running." });
+});
 
+app.use('/back-office' , require('./src/routes/auth.route'));
 
-main();
+const PORT = 8002;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}. `);
+});
